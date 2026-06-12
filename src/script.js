@@ -1,25 +1,23 @@
 const API_URL = "https://todo-backend-pki8.onrender.com/todos";
 
 async function loadTodos() {
+  console.log("Fetching from:", API_URL);
   const res = await fetch(API_URL);
-  const todos = await res.json();
-
+  const text = await res.text();
+  console.log("Raw response:", text);
+  const todos = JSON.parse(text);
   const list = document.getElementById("todoList");
   list.innerHTML = "";
-
   todos.forEach((todo) => {
     const li = document.createElement("li");
     li.textContent = todo.title;
-
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
     deleteBtn.onclick = () => deleteTodo(todo._id);
-
     li.appendChild(deleteBtn);
     list.appendChild(li);
   });
 }
-
 async function addTodo() {
   const input = document.getElementById("todoInput");
   const title = input.value.trim();
