@@ -1,4 +1,4 @@
-const API_URL = "https://todo-backend-pki8.onrender.com";
+const API_URL = "https://todo-backend-pki8.onrender.com/todos";
 async function loadTodos() {
   const res = await fetch(API_URL);
   const todos = await res.json();
