@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:5000/todos";
-
+const API_URL = import.meta.env.VITE_API_URL;
 async function loadTodos() {
   const res = await fetch(API_URL);
   const todos = await res.json();
