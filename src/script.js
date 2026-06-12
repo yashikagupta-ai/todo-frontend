@@ -1,4 +1,5 @@
 const API_URL = "https://todo-backend-pki8.onrender.com/todos";
+
 async function loadTodos() {
   const res = await fetch(API_URL);
   const todos = await res.json();
@@ -27,20 +28,30 @@ async function addTodo() {
 
   await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ title: title }),
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: title
+    })
   });
 
   input.value = "";
-  loadTodos();
+
+  await loadTodos();
 }
 
 async function deleteTodo(id) {
   await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
+    method: "DELETE"
   });
 
-  loadTodos();
+  await loadTodos();
 }
 
+// Make functions visible to HTML onclick
+window.addTodo = addTodo;
+window.deleteTodo = deleteTodo;
+
+// Initial load
 loadTodos();
